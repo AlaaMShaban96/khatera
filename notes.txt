@@ -1,0 +1,125 @@
+array_key_exists()// this array for searching data on array
+super globl array $_SERVER["REQUEST_URI"] this for given url on browser	
+trim(var,"")this for searchimg about anything on array
+------------------------------
+Structural of Route like this 
+
+Route::get  ( '/subject'                ,'SubjectController@index'  );
+Route::get  ( '/subject/create'         ,'SubjectController@create' );
+Route::get  ( '/subject/{subject}'      ,'SubjectController@show'   );
+Route::post ( '/subject'                ,'SubjectController@store'  );
+Route::get  ( '/subject/{subject}/edit' ,'SubjectController@edit'   );
+Route::patch( '/subject/{subject}'      ,'SubjectController@update' );
+Route::delet( '/subject/{subject}'      ,'SubjectController@destroy');
+-------------
+for install vue js 
+composer require laravel/ui --dev
+php artisan ui vue
+php artisan ui vue --auth
+npm install && npm run dev
+
+--------------
+session(key=>vlue); this save data long time
+
+session()->flash(key,vlue); this svae data short time
+-------------
+namespase for know any function use it between other class 
+-------------
+vendoe folder this folder for install all pakeg you downloded 
+-----------
+$errors->any() this for any error reterun form valdation 
+----------
+{{old('colum')}} this for return old value on this feild
+----------
+when i send id for item i need nameing a variable SAME NAME of prameter route::get('/subject/{<name>}/edit', 'subjectController@edit')=> public fungtion edit(Subject <name>)
+-------------
+fun back()  this fun for return back page<-
+----------
+policy usening when need giv parmition on ech fun and useing with auth and  middleware
+two method for useing meddleware
+1:on route
+2:on Specific method
+ ------------------
+POLICY
+if need using policy on your project you need to create policy by command php <<php artisan make:policy "polic name">> and you need to add Gate on 
+
+<<AuthServiceProvider.php >> on this method <<boot>>  Gate::define(':) :this name you needed for access to this Gate','App\Policies\:0:<<policy-name>>@ :p:<<policy fun>>')
+
+and when you need using this policy if useing on controller useing  abort_if(Gate::allows(< :) >,'< :0 @ :p >'),404); or useing on balde for any your condtion use  
+       @can('< :) >',your prametar for this fun )
+
+------------------------------------
+
+when you need using mailable first need look to an inbox you need useing Work with him and seach about how to connection with him just focus about 
+
+config.action_mailer.delivery_method = :smtp
+
+config.action_mailer.smtp_settings = {
+  :user_name => '18ab49daced657',
+  :password => '788a502da0f0c3',
+  :address => 'smtp.mailtrap.io',
+  :domain => 'smtp.mailtrap.io',
+  :port => '2525',
+  :authentication => :cram_md5
+}
+and remamber use import for mail class dont Do not name the class name mail and  mailable <<use Illuminate\Support\Facades\Mail;>>
+
+and write this code on build
+
+  public function build()
+    {
+        
+   $address = 'ala96ala96@gmail.com';
+    $name = 'علاء البدراني';
+    $subject = 'New Course';
+    return $this->markdown('email.send')
+         ->from($address, $name)
+        ->subject($subject)
+        ->with('subject_name',$this->subject_name);
+}
+-----------------------------------------------
+
+to send email or any event you needed make just need make : event and make: Listener and when have action and you need respons you have need call event(new <<event name >>);
+
+and on Listener  you have function handel this function All events will be executed like send email ...etc
+
+----------------------------
+for useing depends between class by composer first create file composer.json and put inside '{}' and doenload composer by command composer install and Write in conposer.json
+"autoload": {
+    "psr-4": {
+        "this namespase for class\\": " this for folder it contains class"
+    }
+}
+
+most usenig namespase on ech class in folder see 06-Namespacing and Autoloading ;
+
+--------------------------------------------------
+the goal for this prosser make websit high performance 
+
+for create queue and prosser on background
+1-create queue table
+
+	php artisan queue:table
+
+	php artisan migrate
+
+2-create job
+
+	php artisan make:job "Name of Class"
+
+3-set any code you needed run on background on job class in handle function
+
+4- and check on file ".env" QUEUE_CONNECTION="database"=>this for prosser on background or "sync"=>this for not run on background 
+
+5- when you need useing any code on background just call 
+	
+	 "job class name "::dispatch("any prameter")
+                ->delay(now()->addMinutes("this number for how long time to send email "))
+for check this queue is work or nit run this command "php artisan queue:work"
+
+----------------------------------------------------------
+
+Task Scheduling 
+
+1- composer require guzzlehttp/guzzle 
+	
