@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreatePostsTable extends Migration
 {
@@ -17,9 +19,9 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->string('titel');            
             $table->string('imge_link');            
-            $table->string('website_link')->default("");            
+             $table->string('website_link')->default("");            
             $table->text('text');
-            $table->date('delet_on');
+            $table->date('delet_on')->default(Carbon::now());
             $table->timestamps();
         });
     }

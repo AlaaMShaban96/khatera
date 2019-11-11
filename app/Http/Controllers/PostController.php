@@ -15,7 +15,7 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->middleware('add');
+        // $this->middleware('add');
     }
 
 
@@ -38,18 +38,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
+// dd("kpfiojeroif");
 
         $data = $request->validate([
             'titel' => 'required',
             'imge_link' => 'required',
             'text' => 'required',
-           // 'delet_after' => 'required',
+           'delet_on' => 'required',
         ]);
-        $data['delet_on'] = Carbon::now()->addDay($request->delet_after);
+        $data['delet_on'] = Carbon::now()->addDay($request->delet_on);
+    //dd( $data['delet_on']);
         $post = Post::create($data);
         $post->website_link = Domain::root() . '/api/post/' . $post->id;
         $post->save();
+        // dd( $post);
 
 
         return response(new PostResources($post), 200);
@@ -63,8 +65,13 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        dd(Carbon::now()->addDay(5));
+      //  dd("iiiiiiiiiiiiiiiii");
         return  view("posts.post", compact("post"));
+    }
+    public function NotFound()
+    {
+      // dd("iiiii;ljklnhj");
+       return view('posts.notfound');
     }
 
 

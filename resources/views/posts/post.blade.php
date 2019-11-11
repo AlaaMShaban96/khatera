@@ -19,18 +19,6 @@
         </div>
     </div>
 
-    {{--  <div class="card">
-    <img class="card-img-top" data-src="{{ $post->imge_link }}" alt="Card image cap">
-    <div class="card-body">
-        <h4 class="card-title">{{ $post->titel }}</h4>
-        <p class="card-text">{{ $post->text }}</p>
-    </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">Item 1</li>
-        <li class="list-group-item">Item 2</li>
-        <li class="list-group-item">Item 3</li>
-    </ul>
-    </div> --}}
 </body>
 
 </html>

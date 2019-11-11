@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Post;
+use Carbon\Carbon;
 
 class add
 {
@@ -15,16 +17,28 @@ class add
      */
     public function handle($request, Closure $next)
     {
+       
         $request->headers->set('Accept', "application/json");
+     
         
-        // dd($request->post);
-        // $this->wow($request);
+     
 
         return $next($request);
     }
 
-    public function wow(Post $post)
+    static public function check_date_of_post($request , Closure $next)
     {
-        dd("wow");
+       
+        $post= Post::findOrFail( $request->route('post')->id);
+
+      return  $post->delet_on >= Carbon::now() ?$next($request): redirect('api/notfound');
     }
+
+
+    static public function check_post($request , Closure $next)
+    {
+       
+    }
+
+    
 }

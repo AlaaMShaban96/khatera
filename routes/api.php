@@ -13,13 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-// Route::post('post/{post}', 'PostController@store');
+
+Route::get('post/', 'PostController@store')->middleware('add::check_date_of_post');
+
+Route::get('/post/{post}', 'PostController@show')->middleware('add::check_date_of_post');
+
+//Route::get('/post/notfound', 'PostController@NotFound');
+Route::view('/notfound','posts.notfound');
 
 
-
-Route::get('post/', 'PostController@store')->middleware('add');
-
-Route::get('/post/{post}', "PostController@show");
