@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +10,7 @@
 |
 */
 
-
+ Route::get('/post/{post}', 'PostController@show')->middleware('checkPost');
+ Route::view('/notfound','posts.notfound');
 
 

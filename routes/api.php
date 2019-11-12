@@ -14,11 +14,9 @@ use Illuminate\Http\Request;
 */
 
 
-Route::get('post/', 'PostController@store')->middleware('add::check_date_of_post');
+Route::get('post/', 'PostController@store')->middleware('addJSON');
 
-Route::get('/post/{post}', 'PostController@show')->middleware('add::check_date_of_post');
 
-//Route::get('/post/notfound', 'PostController@NotFound');
-Route::view('/notfound','posts.notfound');
+
 
 

@@ -3,8 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Post;
+use Carbon\Carbon;
 
-class add
+class checkPost
 {
     /**
      * Handle an incoming request.
@@ -15,15 +17,8 @@ class add
      */
     public function handle($request, Closure $next)
     {
-        $request->headers->set('Accept', "application/json");
-
-        return $next($request);
+        $post= Post::findOrFail( $request->route('post')->id);
+           
+        return  $post->delet_on >= Carbon::now() ? $next($request): redirect('/notfound');
     }
-
-    
-
-
-    
-
-    
 }

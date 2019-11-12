@@ -13,7 +13,7 @@ class PostResources extends JsonResource
      * @return array
      */
     public function toArray($request)
-    {
+    { 
         return [
             "website_link" => $this->website_link,
         ];
