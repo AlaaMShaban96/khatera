@@ -44,7 +44,7 @@ class PostController extends Controller
             'titel' => 'required',
             'imge_link' => 'required',
             'text' => 'required',
-           'delet_on' => 'required',
+           'delet_on' => 'required|numeric|min:0|not_in:0',
         ]);
 
         $post = Post::firstOrCreate([

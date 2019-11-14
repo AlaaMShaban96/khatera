@@ -11,6 +11,6 @@
 */ 
 
  Route::get('/post/{post}', 'PostController@show')->middleware('checkPost');
- Route::view('/notfound','eerors.404');
+ Route::view('/notfound','errors.404');
 
 
