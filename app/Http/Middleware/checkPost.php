@@ -18,7 +18,13 @@ class checkPost
     public function handle($request, Closure $next)
     {
         $post= Post::findOrFail( $request->route('post')->id);
+        if ($post->delet_on >= Carbon::now()) {
+          return  $next($request);
+        }else {
+            $post->delete();
+            return  redirect('/notfound');
+        }
            
-        return  $post->delet_on >= Carbon::now() ? $next($request): redirect('/notfound');
+        
     }
 }
