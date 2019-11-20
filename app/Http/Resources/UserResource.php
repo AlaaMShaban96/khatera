@@ -4,8 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostResources extends JsonResource
-{ 
+class UserResource extends JsonResource
+{
     /**
      * Transform the resource into an array.
      *
@@ -13,9 +13,15 @@ class PostResources extends JsonResource
      * @return array
      */
     public function toArray($request)
-    { 
+    {
         return [
-            "website_link" => $this->website_link,
+            'user'=>[
+                'id'=>$this->id,
+                'name'=>$this->name,
+              
+            ],
+            'access_Token'=>$this-> createaccessToken(),
+
         ];
     }
 }

@@ -16,6 +16,16 @@ use Illuminate\Http\Request;
 
 Route::get('post/', 'PostController@store')->middleware('addJSON');
 
+Route::post('/register', 'Api\AuthController@register');
+Route::post('/login', 'Api\AuthController@login');
+
+
+Route::middleware('auth:api')->get('/user', function(Request $request) {
+    
+  
+        dd('done');
+   
+});
 
 
 
