@@ -1,15 +1,21 @@
 <?php
  
 namespace App;
-use Carbon\Carbon;
 use Request;
+
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
     protected $fillable = [
-        "titel", "imge_link", "text", "website_link",'delet_on'
+        "titel", "image", "content", "website_link",'period','user_id'
     ];
+    protected $table = 'posts';
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
   /**
      * Store a newly created resource in storage.
@@ -17,15 +23,20 @@ class Post extends Model
      * @param  int   $number_day      The number of days to double
      * @return \Illuminate\Http\Response
      */
-    public function Check_your_post($number_day)
+    public function CheckYourPost($number_day)
     {
         if(!$this->website_link){
 
             $this->website_link = Request::root() . '/post/' . $this->id;
-            $this->delet_on=  Carbon::now()->addDay($number_day);
+            $this->period=  Carbon::now()->addDay($number_day);
             $this->save();
         }
        
         
     } 
+    public function push_post_public()
+    {
+       $this->public=true;
+       $this->save();
+    }
 }

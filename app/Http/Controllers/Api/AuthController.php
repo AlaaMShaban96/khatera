@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -13,15 +14,14 @@ class AuthController extends Controller
     { 
          $validatedData = $request->validate([
              'name'=>'required',
-             'email'=>'email|required',
+             'email'=>'required|email|max:255|unique:users',
              'password'=>'required'
          ]); 
         
          $validatedData['password'] = bcrypt($request->password);
        
-         $user = User::create($validatedData);
-        
-         return response(new UserResource( $user), 200);
+         $user = User::firstOrCreate($validatedData);
+         return (new UserResource( $user))->response()->setStatusCode(200);
        
     
     }
@@ -37,6 +37,16 @@ class AuthController extends Controller
              return response(['message'=>'Invalid credentials']);
          }
        
-        return response(new UserResource( auth()->user()), 200);
+        return (new UserResource( auth()->user()))->response()->setStatusCode(200);
+    }
+    public function logout()
+    { 
+        if (auth()->check()) {
+            auth()->user()->AauthAcessToken()->delete();
+            return response(['message'=>'logout successful '],200);
+        }
+        return response(['message'=>'logout fault']);
+        
+
     }
 }

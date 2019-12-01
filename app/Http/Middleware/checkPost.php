@@ -19,7 +19,7 @@ class checkPost
     {
         $post= Post::findOrFail( $request->route('post')->id);
 
-        if ($post->delet_on >= Carbon::now()) {
+        if ($post->period >= Carbon::now()) {
 
           return  $next($request);
 

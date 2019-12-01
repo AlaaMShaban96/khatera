@@ -32,7 +32,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    protected $table = 'users';
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
     /**
      * The attributes that should be cast to native types.
      *
@@ -41,12 +46,31 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function AauthAcessToken(){
+        return $this->hasMany(OauthAccessToken::class);
+    }
 
-    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function followers()
+    {
+    return $this->belongsToMany(User::class, 'followers', 'leader_id', 'follower_id')->withTimestamps();
+    }
+
+
+    public function followings()
+    { 
+    return $this->belongsToMany(User::class, 'followers', 'follower_id', 'leader_id')->withTimestamps();
+    }
+
+
+
 
     public function createaccessToken()
     {
         
        return  $this->createToken('authToken')->accessToken;
     }
+   
 }

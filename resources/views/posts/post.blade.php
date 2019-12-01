@@ -12,7 +12,7 @@
 
 <body>
     <div class="card">
-        <img class="card-img-top" height="300px" src="{{ $post->imge_link }}" alt="">
+        <img class="card-img-top" height="300px" src="{{ $post->image }}" alt="">
         <div class="card-body">
             <h4 class="card-title">{{ $post->titel }}</h4>
             <p class="card-text">{{ $post->text }}</p>

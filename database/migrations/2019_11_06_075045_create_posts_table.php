@@ -17,12 +17,16 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->nullable();;
             $table->string('titel');            
-            $table->string('imge_link');            
-             $table->string('website_link')->default("");            
-            $table->text('text');
-            $table->date('delet_on')->default(Carbon::now());
+            $table->string('image');            
+            $table->string('website_link')->default("");            
+            $table->text('content');
+            $table->date('period')->default(Carbon::now());
+            $table->boolean('public')->default(false);
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 
