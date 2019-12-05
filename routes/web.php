@@ -1,4 +1,6 @@
 <?php
+
+use Faker\Provider\Image;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,8 +13,8 @@
 */ 
 
  Route::get('/post/{post}', 'PostController@show')->middleware('checkPost');
- Route::view('/notfound','errors.404');
 
+ Route::view('/notfound','errors.404');
 
 
 Auth::routes();

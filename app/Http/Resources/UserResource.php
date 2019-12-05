@@ -20,7 +20,7 @@ class UserResource extends JsonResource
                 'name'=>$this->name,
               
             ],
-            'access_Token'=>$this-> createaccessToken(),
+           // 'access_Token'=>$this-> createaccessToken(),
 
         ];
     }

@@ -21,8 +21,7 @@ class PostController extends Controller
        
     }
     public function show(Post $post)
-    {
-        return  view("posts.post", compact("post"));
+    {  return  view("posts.post", compact("post"));
     }
  
     public function destroy(Post $post)

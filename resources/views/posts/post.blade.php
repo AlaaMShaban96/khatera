@@ -12,7 +12,8 @@
 
 <body>
     <div class="card">
-        <img class="card-img-top" height="300px" src="{{ $post->image }}" alt="">
+        <img height="200px" src="{{ asset("/storage/$post->image") }}">
+        
         <div class="card-body">
             <h4 class="card-title">{{ $post->titel }}</h4>
             <p class="card-text">{{ $post->text }}</p>

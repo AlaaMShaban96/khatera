@@ -34,7 +34,7 @@ class AuthController extends Controller
          ]);
         
          if(!auth()->attempt($loginData)) {
-             return response(['message'=>'Invalid credentials']);
+             return response(['message'=>'Invalid credentials'],401);
          }
        
         return (new UserResource( auth()->user()))->response()->setStatusCode(200);

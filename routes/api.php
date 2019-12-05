@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 
 
 
-Route::GET('post/', 'Api\PostController@store')->middleware('addJSON');//this route for Sharing post private   
+Route::POST('post/', 'Api\PostController@store')->middleware('addJSON');//this route for Sharing post private   
 
 
 Route::POST('users/register', 'Api\AuthController@register');//this route for  register user
