@@ -1,15 +1,15 @@
 <?php
  
 namespace App;
-use Request;
-
 use Carbon\Carbon;
+
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Request;
 
 class Post extends Model
 {
     protected $fillable = [
-        "titel", "image", "content", "website_link",'period','user_id'
+        "titel", "image", "content", "website_link",'period','user_id','public',
     ];
     protected $table = 'posts';
     public function user()

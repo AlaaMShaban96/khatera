@@ -46,9 +46,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function AauthAcessToken(){
+    
+    public function Token(){
         return $this->hasMany(OauthAccessToken::class);
-    }
+    } 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -64,7 +65,15 @@ class User extends Authenticatable
     return $this->belongsToMany(User::class, 'followers', 'follower_id', 'leader_id')->withTimestamps();
     }
 
-
+    public function addFollowers($id)
+    {
+        $this->followers()->attach($id);
+    }
+    
+    public function deletefollowings($id)
+    {
+        $this->followers()->detach($id);
+    }
 
 
     public function createaccessToken()
@@ -74,3 +83,4 @@ class User extends Authenticatable
     }
    
 }
+ 

@@ -44,7 +44,7 @@ class FollowerController extends Controller
             
             return response()->json(['error'=> 'User does not exist.'],400);
         }
-        $user->followers()->detach(auth()->user()->id);
+        $user->deletefollowings(auth()->user()->id);
         return response()->json(['success'=> 'Successfully unFollow the user.'],200);    
     }
 

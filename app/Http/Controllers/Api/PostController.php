@@ -21,15 +21,7 @@ class PostController extends Controller
     {
 
 
-        $data = $request->validate([
-            'titel' => 'required',
-            'image' => 'required',
-            'content' => 'required',
-            'period' => 'required|numeric|min:0|not_in:0',
-        ]);
-
-
-     
+        $data = $request->validatePost();
 
         $post = Post::firstOrCreate([
             'titel'     => $data['titel'] ,
@@ -37,26 +29,21 @@ class PostController extends Controller
             'content'   => $data['content'] ,
         ]); 
         
- // dd($post->image);
         $post->CheckYourPost($request->period);
+        
         return (new PostLinkResources($post))->response()->setStatusCode(200);
+
     }
 
     
     public function upload_store(Request $request)
     {
 
-
-        $data = $request->validate([
-            'titel' => 'required',
-            'image' => 'required',
-            'content' => 'required',
-            'period' => 'required|numeric|min:0|not_in:0',
-        ]);
+        $data = $request->validatePost();
        
         
         $post = Post::firstOrCreate([
-            'user_id'   => auth()->user()->id,
+            'user_id'   => auth('api')->user()->id,
             'titel'     => $data['titel'] ,
             'image'     => $data['image'] ,
             'content'   => $data['content'] ,

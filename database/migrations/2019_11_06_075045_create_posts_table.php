@@ -13,16 +13,16 @@ class CreatePostsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up() 
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->nullable();;
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('titel');            
             $table->string('image');            
             $table->string('website_link')->default("");            
             $table->text('content');
-            $table->date('period')->default(Carbon::now());
+            $table->date('period')->default('1');
             $table->boolean('public')->default(false);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
