@@ -36,7 +36,7 @@ Route::group(['middleware' => ['addJSON']], function () {
                         Route::POST('post/upload', 'Api\PostController@upload_store')->name('post.upload');  //this for upload post
  
 
-                        Route::GET('users/logout', 'Api\AuthController@logout');// this for logout from account
+                        Route::post('users/logout', 'Api\AuthController@logout');// this for logout from account
 
 
                         Route::group(['prefix' => 'user'], function () {

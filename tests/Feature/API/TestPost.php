@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Feature\API;
 
 use App\User;
@@ -7,13 +6,12 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class TestSharingPostPublic extends TestCase
-{ use WithFaker,RefreshDatabase;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+class TestPost extends TestCase
+{
+    use WithFaker,RefreshDatabase;
+
+
+    //Sharing Post Public ================================================================>
     public function test_uploade_post_public_successful()
     {
         $this->withoutExceptionHandling();
@@ -28,7 +26,7 @@ class TestSharingPostPublic extends TestCase
         //check database
         $this->assertDatabaseHas('posts', $post->toArray());   
     }
-
+    
     public function test_uploade_post_public_required_image()
     {
         $user = factory(User::class)->create();
@@ -59,4 +57,54 @@ class TestSharingPostPublic extends TestCase
         $this->post('api/post/upload', $post->toArray())->assertstatus(422);
       
     }
+    
+    //Sharing Post Private ==================================================================>
+
+    public function test_sharing_post_private_is_successful ()
+    {
+        $post=factory('App\Post')->raw();
+        
+        $this->call('POST','api/post/',  $post)->assertOk();
+    }
+ 
+    public function test_sharing_post_private_required_image ()
+    {
+       $post=factory('App\Post')->raw(["image"=>'']);
+
+        $this->post('api/post/',$post)->assertstatus(422);
+
+        $this->assertDatabaseMissing('Posts',$post);
+       
+    }
+
+    public function test_sharing_post_private_required_titel ()
+    {
+        $post=factory('App\Post')->raw(["titel"=>'']);
+
+        $this->post('api/post/', $post)->assertstatus(422);
+
+        $this->assertDatabaseMissing('Posts', $post);
+       
+    }
+
+    public function test_sharing_post_private_required_content ()
+    {
+        $post=factory('App\Post')->raw(["content"=>'']);
+
+        $this->post('api/post/', $post)->assertstatus(422);
+
+        $this->assertDatabaseMissing('Posts', $post);
+       
+    }
+
+    public function test_sharing_post_private_required_period ()
+    {
+        $post=factory('App\Post')->raw(["period"=>'']);
+
+        $this->post('api/post/',$post)->assertstatus(422);
+
+        $this->assertDatabaseMissing('Posts',$post);
+       
+    }
+
 }

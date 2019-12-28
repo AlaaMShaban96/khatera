@@ -9,7 +9,7 @@ use Illuminate\Http\UploadedFile;
 
 $factory->define(Post::class, function (Faker $faker) {
     return [
-        'id'=>1,
+        'id'=>1, 
         'user_id'=>null,
         'titel' => $faker->sentence,
         'website_link'=>"",

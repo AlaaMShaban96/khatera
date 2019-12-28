@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
@@ -34,6 +35,8 @@ class AuthController extends Controller
    
     public function login(Request $request)
     {
+
+
          $loginData = $request->validate([
              'email' => 'email|required',
              'password' => 'required'
@@ -41,18 +44,16 @@ class AuthController extends Controller
          if(!auth()->attempt($loginData)) {
              return response(['message'=>'Invalid credentials'],401);
          }
-       
+     
         return (new UserResource( auth()->user()))->response()->setStatusCode(200);
     }
     public function logout()
-    { 
-        // dd('here');
+    {         // dd('here');
         if (auth()->check()) {
-            auth()->user()->Token()->delete();
+            // auth()->user()->token()->revoke();
             return response(['message'=>'logout successful '],200);
         }
         return response(['message'=>'logout fault'],201);
-        
 
     }
 

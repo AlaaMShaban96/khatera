@@ -47,9 +47,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-    public function Token(){
-        return $this->hasMany(OauthAccessToken::class);
-    } 
+    // public function Token(){
+    //     return $this->hasMany(OauthAccessToken::class);
+    // } 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
