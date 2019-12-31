@@ -42,7 +42,7 @@ Route::group(['middleware' => ['addJSON']], function () {
                         Route::group(['prefix' => 'user'], function () {
 
 
-                                Route::GET('/followers'       , 'Api\FollowerController@followers');//get all user was following you 
+                                // Route::GET('/followers'       , 'Api\FollowerController@followers');//get all user was following you 
 
                                 Route::GET('/followings'      , 'Api\FollowerController@followings'); //get all user are you following  
 

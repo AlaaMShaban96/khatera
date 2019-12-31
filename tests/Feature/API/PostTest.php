@@ -6,12 +6,15 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class TestPost extends TestCase
+class PostTest extends TestCase
 {
     use WithFaker,RefreshDatabase;
 
 
-    //Sharing Post Public ================================================================>
+    /*=======================================================================================================================*/
+    /*==============================================>>>  Sharing Post Public  <<============================================*/
+    /*=====================================================================================================================*/
+    
     public function test_uploade_post_public_successful()
     {
         $this->withoutExceptionHandling();
@@ -58,7 +61,9 @@ class TestPost extends TestCase
       
     }
     
-    //Sharing Post Private ==================================================================>
+    /*=======================================================================================================================*/
+    /*==============================================>>> Sharing Post Private  <<============================================*/
+    /*=====================================================================================================================*/
 
     public function test_sharing_post_private_is_successful ()
     {

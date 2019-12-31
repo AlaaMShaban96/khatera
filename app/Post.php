@@ -37,6 +37,6 @@ class Post extends Model
     public function push_post_public()
     {
        $this->public=true;
-       $this->save();
+       
     }
 }

@@ -61,6 +61,7 @@ class FollowerController extends Controller
     }
     public function followingsPost()
     {
+        // dd(auth()->user()->followings);
         return (new UsersWithPostsResource(auth()->user()->followings))->response()->setStatusCode(200);
     }
     

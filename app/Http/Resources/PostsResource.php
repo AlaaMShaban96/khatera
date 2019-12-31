@@ -22,7 +22,7 @@ class PostsResource extends JsonResource
         //     ];
         // });
         
-        // return $this->resource->where('public', true);
-         return parent::toArray($request);
+         return $this->resource->where('public', false);
+        //  return parent::toArray($request);
     }
 }

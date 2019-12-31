@@ -18,12 +18,12 @@ class UsersWithPostsResource extends JsonResource
        
          return $this->resource->map(function ($user) {
              return [
-                'data'=>[
-                        'id' => $user->id,
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'posts' => new PostsResource($user->posts)
-                ]
+                
+                        // 'id' => $user->id,
+                        // 'name' => $user->name,
+                        // 'email' => $user->email,
+                       'posts' => new PostsResource($user->posts)
+                
              ];
         });
          

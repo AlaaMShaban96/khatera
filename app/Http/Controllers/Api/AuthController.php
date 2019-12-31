@@ -15,15 +15,15 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     { 
-        //  $validatedData = $request->validateUser(); 
+         $validatedData = $request->validateUser(); 
 
-         $validatedData = $request->validate([
-             'name'=>'required',
-             'email'=>'required|email|max:255|unique:users',
-             'password'=>'required'
-         ]); 
+        //  $validatedData = $request->validate([
+        //      'name'=>'required',
+        //      'email'=>'required|email|max:255',
+        //      'password'=>'required'
+        //  ]); 
         
-        //  $validatedData['password'] = bcrypt($request->password);
+         $validatedData['password'] = bcrypt($request->password);
        
          $user = User::firstOrCreate($validatedData);
         //  $user->createToken('Laravel Password Grant Client')->accessToken;
@@ -37,14 +37,15 @@ class AuthController extends Controller
     {
 
 
-         $loginData = $request->validate([
-             'email' => 'email|required',
-             'password' => 'required'
-         ]);
-         if(!auth()->attempt($loginData)) {
-             return response(['message'=>'Invalid credentials'],401);
-         }
-     
+        $loginData = $request->validate([
+            'email' => 'email|required',
+            'password' => 'required'
+        ]);
+    //  dd( $loginData);
+        if(!auth()->attempt($loginData)) {
+            return response(['message'=>'Invalid credentials'],401);
+        }
+    
         return (new UserResource( auth()->user()))->response()->setStatusCode(200);
     }
     public function logout()

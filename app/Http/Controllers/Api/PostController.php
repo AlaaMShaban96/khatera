@@ -40,20 +40,26 @@ class PostController extends Controller
     {
 
         $data = $request->validatePost();
-       
+    //   dd (  $data);
         
         $post = Post::firstOrCreate([
             'user_id'   => auth('api')->user()->id,
             'titel'     => $data['titel'] ,
-            'image'     => $data['image'] ,
+            'image'     => $this->uploadeImage( $request) ,
             'content'   => $data['content'] ,
+            'website_link'   => $data['website_link'] ,
+            'period'   => $data['period'] ,
+            'public'   => $data['public'] ,
             
         ]);
+        // dd($post,$request->all());
         $post->push_post_public();
-      
+
+        $post->save();
+
         return response()->json(['success'=> 'Successfully Pushed  Thought.'],200);
     }
-    private function updateImage(Request $request)
+    private function uploadeImage(Request $request)
      {
    
         return  Storage::disk('public')->put("images", $request->file('image'));
